@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">3조</string>
+    <string name="title_home">홈</string>
+    <string name="title_measure">교정</string>
+    <string name="title_exercise">운동</string>
+</resources>
