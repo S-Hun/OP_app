@@ -10,7 +10,7 @@ public class MeasureViewModel extends ViewModel {
 
     public MeasureViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("측정");
+        mText.setValue("운동 자세를 촬영해 올바른 자세인지 판별해드립니다.");
     }
 
     public LiveData<String> getText() {
