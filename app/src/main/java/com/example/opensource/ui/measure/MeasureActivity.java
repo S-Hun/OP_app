@@ -47,7 +47,6 @@ public class MeasureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_measure);
 
 
-        final TextView resText = (TextView) findViewById(R.id.restext);
         Button reqButton = (Button) findViewById(R.id.reqbutton);
     }
 

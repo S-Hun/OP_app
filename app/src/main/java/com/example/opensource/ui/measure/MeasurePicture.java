@@ -17,6 +17,7 @@ import com.example.opensource.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,37 +28,51 @@ import java.net.URL;
 
 public class MeasurePicture extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measure_picture);
 
-        final Intent intent = getIntent();
-        Bitmap image = (Bitmap) intent.getParcelableExtra("image");
 
         ImageView imageFrame = (ImageView) findViewById(R.id.reqImage);
         TextView textview = (TextView) findViewById(R.id.base64text);
+
+        final Intent intent = getIntent();
+        Bitmap image = (Bitmap) intent.getParcelableExtra("image");
+
         imageFrame.setImageBitmap(image);
         textview.setText(intent.getExtras().getString("base64text"));
 
-        final TextView resText = (TextView) findViewById(R.id.restext);
         Button reqButton = (Button) findViewById(R.id.reqbutton);
 
         reqButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject json_data = new JSONObject();
-
-                HttpUtil transfer = new HttpUtil();
-
+//                JSONObject json_data = new JSONObject();
+//
+//                HttpUtil transfer = new HttpUtil();
+//
+//                try {
+//                    json_data.put("b64_image", intent.getExtras().getString("base64text"));
+//
+//                    String json_string = json_data.toString();
+//
+//                    transfer.execute(json_string);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
                 try {
-                    json_data.put("b64_image", intent.getExtras().getString("base64text"));
+                    JSONObject json_data = new JSONObject();
+                    json_data.put("b64_image", "test");
 
                     String json_string = json_data.toString();
 
-                    transfer.execute(json_string);
 
-                } catch (JSONException e) {
+                    new HttpUtil().execute(json_string);
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -81,55 +96,41 @@ public class MeasurePicture extends AppCompatActivity {
             try {
                 String url = "http://210.124.143.3:8000/";
                 URL obj = new URL(url);
-
-                HttpURLConnection conn = (HttpURLConnection) ((new URL(params[0]).openConnection()));
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
                 conn.setReadTimeout(10000);
                 conn.setConnectTimeout(15000);
                 conn.setRequestMethod("POST");
-                conn.setDoInput(true); // InputStream으로 서버로 부터 응답을 받겠다는 옵션.
-                conn.setDoOutput(true); // OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
-                conn.setRequestProperty("Accept-Charset", "UTF-8");
-                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type","application/json");
 
-                //Write
+
+
+                byte[] outputInBytes = params[0].getBytes("UTF-8");
 
                 OutputStream os = conn.getOutputStream();
-
-                os.write(params[1].getBytes("UTF-8"));
-
-                os.flush();
-
+                os.write( outputInBytes );
                 os.close();
 
+//                Toast.makeText(getApplicationContext(), "연결중", Toast.LENGTH_SHORT).show();
 
-                //Read
+                int resCode = conn.getResponseCode();
 
-                BufferedReader br = null;
-
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
-                    br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-                } else {
-
-                    br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
-
-                }
-
-
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String line;
                 StringBuffer response = new StringBuffer();
-                while ((line = br.readLine()) != null) {
+                while((line = br.readLine()) != null) {
                     response.append(line);
-                    response.append('\r');
+                    response.append("");
                 }
                 br.close();
-                this.res = response.toString();
+
+                res = response.toString();
+
             } catch (Exception e) {
-
                 e.printStackTrace();
-
             }
 
             return null;
@@ -141,8 +142,8 @@ public class MeasurePicture extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-            TextView resText = (TextView) findViewById(R.id.restext);
-            resText.setText(res);
+            TextView textview = (TextView)findViewById(R.id.base64text);
+            textview.setText(res);
         }
     }
 
