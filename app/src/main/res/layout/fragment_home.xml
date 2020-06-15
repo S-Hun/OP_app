@@ -11,7 +11,6 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-
         android:layout_height="288dp"
         android:layout_marginBottom="1dp"
         android:background="#393e46"
@@ -22,16 +21,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/login_button"
-            android:text="로그인"
-            android:textColor="@drawable/login_button_text"
-            android:textSize="30sp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/capture" />
     </FrameLayout>
+
+
 
     <ListView
         android:id="@+id/homeList"
