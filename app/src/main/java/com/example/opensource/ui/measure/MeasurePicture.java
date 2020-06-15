@@ -23,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -65,7 +67,7 @@ public class MeasurePicture extends AppCompatActivity {
 //                }
                 try {
                     JSONObject json_data = new JSONObject();
-                    json_data.put("b64_image", "test");
+                    json_data.put("b64_image", intent.getExtras().getString("base64text"));
 
                     String json_string = json_data.toString();
 
@@ -94,7 +96,7 @@ public class MeasurePicture extends AppCompatActivity {
         @Override
         public Void doInBackground(String... params) {
             try {
-                String url = "http://210.124.143.3:8000/";
+                String url = "http://ebb3bc6d4a60.ngrok.io/";
                 URL obj = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
@@ -106,19 +108,20 @@ public class MeasurePicture extends AppCompatActivity {
                 conn.setRequestProperty("Content-Type","application/json");
 
 
+                StringBuffer buffer = new StringBuffer();
+                buffer.append(params[0]);
 
-                byte[] outputInBytes = params[0].getBytes("UTF-8");
-
-                OutputStream os = conn.getOutputStream();
-                os.write( outputInBytes );
-                os.close();
+                OutputStreamWriter outStream = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+                PrintWriter writer = new PrintWriter(outStream);
+                writer.write(buffer.toString());
+                writer.flush();
 
 //                Toast.makeText(getApplicationContext(), "연결중", Toast.LENGTH_SHORT).show();
 
                 int resCode = conn.getResponseCode();
 
-                InputStream is = conn.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                InputStreamReader is = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                BufferedReader br = new BufferedReader(is);
                 String line;
                 StringBuffer response = new StringBuffer();
                 while((line = br.readLine()) != null) {
