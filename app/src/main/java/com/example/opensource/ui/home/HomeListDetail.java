@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.opensource.R;
@@ -37,5 +38,9 @@ public class HomeListDetail extends AppCompatActivity {
         {
             e.printStackTrace();
         }
+    }
+
+    public void goBack(View view) {
+        finish();
     }
 }

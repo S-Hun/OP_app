@@ -86,8 +86,8 @@ public class MeasureActivity extends AppCompatActivity {
             if (bitmap != null) {
 
                 Log.d(TAG, bitmap.getClass().getName());
-                ImageView imageFrame = (ImageView) findViewById(R.id.imageView);
-                imageFrame.setImageBitmap(bitmap);
+//                ImageView imageFrame = (ImageView) findViewById(R.id.imageView);
+//                imageFrame.setImageBitmap(bitmap);
                 Intent nextIntent = new Intent(getApplicationContext(), MeasurePicture.class);
                 nextIntent.putExtra("image", bitmap);
                 nextIntent.putExtra("base64text", BitmapToString(bitmap));

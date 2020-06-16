@@ -28,11 +28,18 @@
             android:src="@drawable/capture" />
     </FrameLayout>
 
+<<<<<<< HEAD
 
     <ListView
         android:id="@+id/homeList"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+=======
+    <ListView
+        android:id="@+id/homeList"
+        android:layout_width="match_parent"
+        android:layout_height="439dp"
+>>>>>>> 7356ec673972f07bca84f4b416c763629eb70a42
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginEnd="1dp"

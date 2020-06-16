@@ -1,6 +1,9 @@
 package com.example.opensource.ui.measure;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,9 +11,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.example.opensource.MainActivity;
 import com.example.opensource.R;
+import com.example.opensource.ui.home.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +82,32 @@ public class MeasureResult extends AppCompatActivity {
 
 //        resultImageView.setImageBitmap(StringToBitmap());
 
+
+    }
+    public void goHomeActivity(View view) {
+
+        Intent intent = new Intent(this, MainActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        startActivity(intent);
+    }
+
+    public void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, fragment);
+        fragmentTransaction.commit();
+    }
+    public void goTakePicture(View view) {
+
+        Intent intent = new Intent(this, MeasureActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        startActivity(intent);
     }
 
     public static Bitmap StringToBitmap(String encodedString) {

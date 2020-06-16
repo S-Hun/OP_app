@@ -38,13 +38,11 @@ public class MeasurePicture extends AppCompatActivity {
 
 
         ImageView imageFrame = (ImageView) findViewById(R.id.reqImage);
-        TextView textview = (TextView) findViewById(R.id.base64text);
 
         final Intent intent = getIntent();
         Bitmap image = (Bitmap) intent.getParcelableExtra("image");
 
         imageFrame.setImageBitmap(image);
-        textview.setText(intent.getExtras().getString("base64text"));
 
         Button reqButton = (Button) findViewById(R.id.reqbutton);
 

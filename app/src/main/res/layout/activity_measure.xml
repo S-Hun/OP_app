@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/take_piture"
-        android:layout_width="165dp"
-        android:layout_height="51dp"
+        android:layout_width="106dp"
+        android:layout_height="36dp"
         android:background="@drawable/capture_button"
         android:onClick="btnClickTaking"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.285"
-        app:srcCompat="@drawable/ic_accessibility_black_24dp" />
+        app:srcCompat="@drawable/squat" />
 
     <TextView
         android:id="@+id/textView3"
