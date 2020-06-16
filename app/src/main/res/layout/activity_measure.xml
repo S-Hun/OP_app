@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/take_piture"
-        android:layout_width="165dp"
-        android:layout_height="51dp"
+        android:layout_width="106dp"
+        android:layout_height="36dp"
         android:background="@drawable/capture_button"
         android:onClick="btnClickTaking"
         app:layout_constraintBottom_toBottomOf="parent"
