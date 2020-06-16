@@ -51,20 +51,6 @@ public class MeasurePicture extends AppCompatActivity {
         reqButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                JSONObject json_data = new JSONObject();
-//
-//                HttpUtil transfer = new HttpUtil();
-//
-//                try {
-//                    json_data.put("b64_image", intent.getExtras().getString("base64text"));
-//
-//                    String json_string = json_data.toString();
-//
-//                    transfer.execute(json_string);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
                 try {
                     JSONObject json_data = new JSONObject();
                     json_data.put("b64_image", intent.getExtras().getString("base64text"));
@@ -91,12 +77,13 @@ public class MeasurePicture extends AppCompatActivity {
             super.onPreExecute();
 
 
+//                Toast.makeText(getApplicationContext(), "연결중", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public Void doInBackground(String... params) {
             try {
-                String url = "http://ebb3bc6d4a60.ngrok.io/";
+                String url = "http://8400b52dc8d3.ngrok.io/";
                 URL obj = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
@@ -116,7 +103,6 @@ public class MeasurePicture extends AppCompatActivity {
                 writer.write(buffer.toString());
                 writer.flush();
 
-//                Toast.makeText(getApplicationContext(), "연결중", Toast.LENGTH_SHORT).show();
 
                 int resCode = conn.getResponseCode();
 
@@ -144,9 +130,15 @@ public class MeasurePicture extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-            TextView textview = (TextView)findViewById(R.id.base64text);
-            textview.setText(res);
+//            Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+//            TextView textview = (TextView)findViewById(R.id.base64text);
+//            textview.setText(res);
+            Log.d("response",res);
+//            Log.d("response",res.getClass().getName());
+
+            Intent nextIntent = new Intent(getApplicationContext(), MeasureResult.class);
+            nextIntent.putExtra("res", res);
+            startActivity(nextIntent);
         }
     }
 
