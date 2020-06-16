@@ -81,7 +81,7 @@ public class MeasurePicture extends AppCompatActivity {
         @Override
         public Void doInBackground(String... params) {
             try {
-                String url = "http://8400b52dc8d3.ngrok.io/";
+                String url = "http://da1aadf13549.ngrok.io/";
                 URL obj = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
